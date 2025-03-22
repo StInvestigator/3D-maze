@@ -13,6 +13,8 @@
 *.userprefs
 *.csproj
 
+.vs/
+
 *.apk
 *.aab
 *.exe

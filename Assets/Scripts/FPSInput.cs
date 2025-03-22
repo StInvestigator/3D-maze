@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -6,6 +7,7 @@ public class FPSInput : MonoBehaviour
 {
     [SerializeField] private float Speed = 6.0F;
     [SerializeField] private float Gravity = 9.8F;
+    private bool isSlowedDown = false;
 
     CharacterController _charController;
 
@@ -24,5 +26,17 @@ public class FPSInput : MonoBehaviour
         movement *= Time.deltaTime;
         movement = transform.TransformDirection(movement);
         _charController.Move(movement);
+    }
+
+    public IEnumerator ReduceSpeedTemporarily(float reductionFactor, float duration)
+    {
+        if (!isSlowedDown)
+        {
+            Speed /= reductionFactor;
+            isSlowedDown = true;
+            yield return new WaitForSeconds(duration);
+            Speed *= reductionFactor;
+            isSlowedDown = false;
+        }
     }
 }
