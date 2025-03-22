@@ -5,23 +5,24 @@ using UnityEngine;
 [AddComponentMenu("Control Script/FPS Input")]
 public class FPSInput : MonoBehaviour
 {
-    [SerializeField] private float Speed = 6.0F;
+    [SerializeField] private float BaseSpeed = 6.0F;
+    private float CurrentSpeed;
     [SerializeField] private float Gravity = 9.8F;
-    private bool isSlowedDown = false;
 
     CharacterController _charController;
 
     void Start()
     {
+        CurrentSpeed = BaseSpeed;
         _charController = GetComponent<CharacterController>();
     }
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal") * Speed;
-        float vertical = Input.GetAxis("Vertical") * Speed;
+        float horizontal = Input.GetAxis("Horizontal") * CurrentSpeed;
+        float vertical = Input.GetAxis("Vertical") * CurrentSpeed;
 
         Vector3 movement = new Vector3(horizontal, 0, vertical);
-        movement = Vector3.ClampMagnitude(movement, Speed);
+        movement = Vector3.ClampMagnitude(movement, CurrentSpeed);
         movement.y -= Gravity;
         movement *= Time.deltaTime;
         movement = transform.TransformDirection(movement);
@@ -30,13 +31,8 @@ public class FPSInput : MonoBehaviour
 
     public IEnumerator ReduceSpeedTemporarily(float reductionFactor, float duration)
     {
-        if (!isSlowedDown)
-        {
-            Speed /= reductionFactor;
-            isSlowedDown = true;
-            yield return new WaitForSeconds(duration);
-            Speed *= reductionFactor;
-            isSlowedDown = false;
-        }
+        CurrentSpeed /= reductionFactor;
+        yield return new WaitForSeconds(duration);
+        CurrentSpeed = BaseSpeed;
     }
 }

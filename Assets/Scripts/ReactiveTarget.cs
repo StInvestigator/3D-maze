@@ -1,25 +1,28 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem.Processors;
 
 public class ReactiveTarget : MonoBehaviour
 {
-    [SerializeField] private float lifeLevel = 100;
+    [SerializeField] private float maxHealth = 100;
+    private float currentHealth;
     public bool isDead = false;
+
+    private Renderer _renderer;
 
     public float ReactOnHit(float damage)
     {
         if (isDead)
         {
-            return lifeLevel;
+            return currentHealth;
         }
-        lifeLevel -= damage;
-        if (lifeLevel <= 0)
+        currentHealth -= damage;
+        UpdateColor();
+        if (currentHealth <= 0)
         {
-            lifeLevel = 0;
+            currentHealth = 0;
             StartCoroutine(Die());
         }
-        return lifeLevel;
+        return currentHealth;
     }
 
     private IEnumerator Die()
@@ -33,11 +36,14 @@ public class ReactiveTarget : MonoBehaviour
 
     void Start()
     {
-
+        currentHealth = maxHealth;
+        _renderer = GetComponent<Renderer>();
     }
 
-    void Update()
+    private void UpdateColor()
     {
-
+        float healthPercentage = currentHealth / maxHealth;
+        Color currentColor = Color.Lerp(Color.red, Color.white, healthPercentage);
+        _renderer.material.color = currentColor;
     }
 }

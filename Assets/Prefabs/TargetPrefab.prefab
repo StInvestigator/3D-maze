@@ -21,21 +21,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5989291668584019971
-Transform:
+--- !u!224 &5989291668584019971
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2810701215564437798}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.16, y: -6.84, z: 1.5}
+  m_LocalPosition: {x: 0, y: 0, z: 1.5}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.16, y: -6.93}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &1291589638572228060
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -67,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a0f32f991b2fe5444b7ad6d4eee7cd2e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -122,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49d0f2d6e5ddbb4f9cc40625776ee95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeLevel: 100
+  maxHealth: 100
   isDead: 0
 --- !u!114 &380150878173362926
 MonoBehaviour:
@@ -139,3 +143,4 @@ MonoBehaviour:
   speed: 3
   obstacleRange: 5
   FireballPrefab: {fileID: 2110662573936593184, guid: ad8fec5af9fe1e5419498707d8cf485d, type: 3}
+  rotationCooldown: 2

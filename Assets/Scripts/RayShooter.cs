@@ -41,7 +41,7 @@ public class RayShooter : MonoBehaviour
     {
         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         sphere.transform.position = pos;
-        sphere.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+        sphere.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         yield return new WaitForSeconds(1);
         Destroy(sphere);
     }
@@ -49,6 +49,7 @@ public class RayShooter : MonoBehaviour
     private void OnGUI()
     {
         int size = 20;
+        style.normal.textColor = Color.white;
         style.fontSize = size;
         float posX = camera.pixelWidth * 0.5f - size * 0.5f;
         float posY = camera.pixelHeight * 0.5f - size * 0.5f;
